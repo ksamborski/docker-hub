@@ -29,9 +29,9 @@ RUN apt-get install -qy \
     software-properties-common
 
 # locale
-ENV LC_ALL C.UTF-8 \
-    LANG C.UTF-8 \
-    LANGUAGE C.UTF-8
+ENV LC_ALL C.UTF-8
+ENV LANG C.UTF-8
+ENV LANGUAGE C.UTF-8
 
 RUN update-locale LANG=C.UTF-8 LC_MESSAGES=POSIX \
    && dpkg-reconfigure locales
