@@ -1,6 +1,6 @@
 # meedan/ruby
 
-FROM meedan/base
+FROM meedan/nodejs
 MAINTAINER sysops@meedan.com
 
 # this and the addition to sources.list is modelled after...
@@ -12,12 +12,8 @@ COPY config/apt/passenger-sources.list /etc/apt/sources.list.d/passenger-sources
 RUN apt-add-repository ppa:brightbox/ruby-ng \
     && apt-get update --fix-missing
 
-# nodejs
-RUN curl -sL https://deb.nodesource.com/setup_4.x | bash -
-
 # http://www.modrails.com/documentation/Users%20guide%20Nginx.html#_installing_packages
 # supervisor is installed since it gets used frequently to kick of delayed job
-# see watchbot-base for an example of supervisor configuration files
 RUN apt-get install -y \ 
     ruby2.3 \
     ruby2.3-dev \
@@ -34,9 +30,8 @@ RUN apt-get install -y \
     nginx-extras \
     libicu52 \
     supervisor \
-    tidy \
-    nodejs
-
+    tidy
+    
 # ruby config
 RUN rm /usr/bin/ruby \
     && ln -s /usr/bin/ruby2.3 /usr/bin/ruby \
