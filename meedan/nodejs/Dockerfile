@@ -9,4 +9,7 @@ RUN curl -sL https://deb.nodesource.com/setup_4.x | bash -
 RUN apt-get install -y \ 
     nodejs
 
-RUN npm install -g nodemon pm2
+RUN npm install -g \
+    nodemon \
+    pm2 \
+    node-static
