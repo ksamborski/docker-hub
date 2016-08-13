@@ -21,6 +21,7 @@ RUN apt-get install -qy \
     tree \
     htop \
     curl \
+    wget \
     tig \
     smem \
     rsync \
