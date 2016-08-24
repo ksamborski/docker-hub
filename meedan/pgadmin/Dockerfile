@@ -16,7 +16,7 @@ RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main' $PG_MAJ
 RUN apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8 \
     && apt-get update 
 
-RUN apt-get install -y expect python-pip python-dev build-essential libpq-dev postgresql-server-dev-$PG_MAJOR
+RUN apt-get install -y expect python-pip python-dev build-essential libpq-dev postgresql-server-dev-$PG_MAJOR postgresql-client
 
 RUN wget -O pgadmin4-1.0b3-py2-none-any.whl "https://ftp.postgresql.org/pub/pgadmin3/pgadmin4/v1.0-beta3/pip/pgadmin4-1.0b3-py2-none-any.whl" 
 
