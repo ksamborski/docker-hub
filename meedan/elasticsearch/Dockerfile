@@ -4,8 +4,9 @@
 FROM elasticsearch:latest
 MAINTAINER sysops@meedan.com
 
-RUN plugin install license
-RUN plugin install marvel-agent
+# removing marvel at Karim's request
+# RUN plugin install license
+# RUN plugin install marvel-agent
 
 # https://github.com/jettro/elasticsearch-gui
 RUN plugin install jettro/elasticsearch-gui 
