@@ -12,4 +12,6 @@ RUN apt-get install -y \
 RUN npm install -g \
     nodemon \
     pm2 \
-    node-static
+    node-static \
+    bower \
+    gulp
