@@ -19,5 +19,6 @@ RUN set -x && \
   rm -rf filebeat* 
   
 COPY bin/docker-entrypoint.sh /
+RUN chmod 755 bin/docker-entrypoint.sh
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD [ "filebeat", "-e" ]
