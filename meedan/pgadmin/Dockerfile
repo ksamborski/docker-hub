@@ -8,24 +8,23 @@ RUN groupadd -r postgres --gid=999 && useradd -r -g postgres --uid=999 postgres 
     && groupadd -r pgadmin --gid=998 && useradd -r -g pgadmin --uid=998 pgadmin
 
 # libpg
-ENV PG_MAJOR 9.6
-ENV PG_VERSION 9.6~beta3-1.pgdg16.04+1
-ENV PGADMIN_FILE pgadmin4-1.0rc1-py2-none-any.whl
-ENV PGADMIN_URL https://ftp.postgresql.org/pub/pgadmin3/pgadmin4/v1.0-rc1/pip/${PGADMIN_FILE}
+ENV PG_MAJOR=9.6
+ENV PGADMIN_FILE=pgadmin4-1.0-py2-none-any.whl
+ENV PGADMIN_URL=https://ftp.postgresql.org/pub/pgadmin3/pgadmin4/v1.0/pip/${PGADMIN_FILE}
 
-RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main' $PG_MAJOR > /etc/apt/sources.list.d/pgdg.list
+RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main' ${PG_MAJOR} > /etc/apt/sources.list.d/pgdg.list
 
 RUN apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8 \
-    && apt-get update 
+    && apt-get update \
+    && apt-get install -y expect python-pip python-dev build-essential libpq-dev postgresql-server-dev-${PG_MAJOR} postgresql-client
 
-RUN apt-get install -y expect python-pip python-dev build-essential libpq-dev postgresql-server-dev-$PG_MAJOR postgresql-client
-
-RUN wget -O ${PGADMIN_FILE} "${PGADMIN_URL}"
+RUN curl -s -o ${PGADMIN_FILE} "${PGADMIN_URL}"
 
 RUN pip install ${PGADMIN_FILE} \
-        && rm ${PGADMIN_FILE} \
         && ln -sf /home/pgadmin/.pgadmin/config_local.py  /usr/local/lib/python2.7/dist-packages/pgadmin4/config_local.py \
         && sed -i "s/DEFAULT_SERVER = 'localhost'/DEFAULT_SERVER = '0.0.0.0'/" /usr/local/lib/python2.7/dist-packages/pgadmin4/config.py
+
+RUN rm ${PGADMIN_FILE} ;
 
 # these ENV vars are intended to get overwritten at docker runtime
 ENV PGADMIN_USER admin@pgadmin.org
