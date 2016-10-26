@@ -32,7 +32,7 @@ RUN apt-get install -qy \
 # locale
 ENV LC_ALL=C.UTF-8 \
     LANG=C.UTF-8 \
-    LANGUAGE=C.UTF-8 \
+    LANGUAGE=C.UTF-8
 
 RUN update-locale LANG=C.UTF-8 LC_MESSAGES=POSIX \
    && dpkg-reconfigure locales
