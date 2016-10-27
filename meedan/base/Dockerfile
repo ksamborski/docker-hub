@@ -18,6 +18,7 @@ RUN apt-get install -qy \
     vim \
     emacs24-nox \
     screen \
+    lsof \
     tree \
     htop \
     curl \
