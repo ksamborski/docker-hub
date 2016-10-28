@@ -64,3 +64,7 @@ RUN gpg --keyserver ha.pool.sks-keyservers.net --recv-keys 6380DC428747F6C393FEA
   && rm /usr/local/bin/tini.asc \
   && chmod +x /usr/local/bin/tini
     
+# gh-md-toc
+RUN curl -o /usr/local/bin/gh-md-toc https://raw.githubusercontent.com/ekalinin/github-markdown-toc/master/gh-md-toc \
+  && chmod +x /usr/local/bin/gh-md-toc
+  
