@@ -9,8 +9,8 @@ RUN groupadd -r postgres --gid=999 && useradd -r -g postgres --uid=999 postgres 
 
 # libpg
 ENV PG_MAJOR=9.6
-ENV PGADMIN_FILE=pgadmin4-1.0-py2-none-any.whl
-ENV PGADMIN_URL=https://ftp.postgresql.org/pub/pgadmin3/pgadmin4/v1.0/pip/${PGADMIN_FILE}
+ENV PGADMIN_FILE=pgadmin4-1.1-py2-none-any.whl
+ENV PGADMIN_URL=https://ftp.postgresql.org/pub/pgadmin3/pgadmin4/v1.1/pip/${PGADMIN_FILE}
 
 RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main' ${PG_MAJOR} > /etc/apt/sources.list.d/pgdg.list
 
