@@ -11,12 +11,17 @@ MAINTAINER sysops@meedan.com
 ENV LE_WORKING_DIR=/acme \
     TEMP_DIR=/tmp/acme_sh \
     CERT_DIR=/certs \
-    ACCOUNT_DIR=/account
+    ACCOUNT_DIR=/account \
+    ACMEUSER=acme
 
+COPY docker_entrypoint.sh /docker_entrypoint.sh
+
+RUN useradd ${ACMEUSER}
 RUN git clone --depth 1 https://github.com/Neilpang/acme.sh.git ${TEMP_DIR} \
-    &&  mkdir -p ${CERT_DIR} ${ACCOUNT_DIR} \
+    &&  mkdir -p ${CERT_DIR} ${ACCOUNT_DIR} ${LE_WORKING_DIR} \
+    && chown -R ${ACMEUSER}:${ACMEUSER} ${LE_WORKING_DIR} \
     && cd ${TEMP_DIR} \
-    && ./acme.sh --install \
+    && gosu ${ACMEUSER} ./acme.sh --install \
         --home ${LE_WORKING_DIR} \
         --certhome ${CERT_DIR} \
         --accountkey ${ACCOUNT_DIR}/account.key \
@@ -24,7 +29,10 @@ RUN git clone --depth 1 https://github.com/Neilpang/acme.sh.git ${TEMP_DIR} \
     && ln -s ${LE_WORKING_DIR}/acme.sh /usr/local/bin \
     && rm -rf ${TEMP_DIR}
 
+
 VOLUME $CERT_DIR
 VOLUME $ACCOUNT_DIR
 
-ENTRYPOINT ["acme.sh"]
+
+USER ${ACMEUSER}
+ENTRYPOINT ["/docker_entrypoint.sh"]
