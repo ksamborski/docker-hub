@@ -27,7 +27,7 @@ renew () {
 
 issue () {
     echo "issue certs";
-    for D in $(cat $DOMAINS); do
+    for D in $(cat $DOMAINS | grep -v '^$\|^\s*\#' ); do
       echo -e "\t$D"
       if [ -n ${CF_Key} ]; then # cloudflare
         acme.sh $TEST --issue --dns dns_cf -d $D;
