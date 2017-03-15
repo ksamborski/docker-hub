@@ -18,7 +18,7 @@ COPY docker_entrypoint.sh /docker_entrypoint.sh
 
 RUN useradd ${ACMEUSER}
 RUN git clone --depth 1 https://github.com/Neilpang/acme.sh.git ${TEMP_DIR} \
-    &&  mkdir -p ${CERT_DIR} ${ACCOUNT_DIR} ${LE_WORKING_DIR} \
+    &&  mkdir -p ${CERT_DIR} ${ACCOUNT_DIR} ${LE_WORKING_DIR}/ca/acme-staging.api.letsencrypt.org ${LE_WORKING_DIR}/ca/acme-v01.api.letsencrypt.org \
     && chown -R ${ACMEUSER}:${ACMEUSER} ${LE_WORKING_DIR} \
     && cd ${TEMP_DIR} \
     && gosu ${ACMEUSER} ./acme.sh --install \
