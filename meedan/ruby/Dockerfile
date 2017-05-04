@@ -19,14 +19,14 @@ RUN apt-get install -y \
     ruby2.3-dev \
     ruby2.3-doc \
     build-essential \
-    libpq-dev \
     libv8-dev \
+    libpq-dev \
     sqlite3 \
     libsqlite3-dev \
+    libmysqlclient-dev \
     passenger \
     bcrypt \
-    libsqlite3-dev \
-    nginx \
+		nginx \
     nginx-extras \
     libicu52 \
     supervisor \
