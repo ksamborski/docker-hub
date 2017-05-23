@@ -38,6 +38,9 @@ ENV LC_ALL=C.UTF-8 \
 RUN update-locale LANG=C.UTF-8 LC_MESSAGES=POSIX \
    && dpkg-reconfigure locales
 
+# umask
+RUN sed -i 's/UMASK.*022/UMASK  002/g' /etc/login.defs
+
 # gnu screen
 RUN chmod u+s /usr/bin/screen && \
     chmod 755 /var/run/screen
