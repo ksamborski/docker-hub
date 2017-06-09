@@ -43,6 +43,9 @@ RUN rm /usr/bin/ruby \
 # bundler
 RUN gem install bundler --no-rdoc --no-ri
 
+# irbrc
+COPY ./config/root/ /root/
+
 # nginx
 COPY ./config/nginx/nginx.conf /etc/nginx/nginx.conf
 COPY ./config/nginx/passenger.conf /etc/nginx/conf.d/passenger.conf
