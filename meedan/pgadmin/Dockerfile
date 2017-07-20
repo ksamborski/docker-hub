@@ -22,7 +22,7 @@ RUN curl -s -o ${PGADMIN_FILE} "${PGADMIN_URL}"
 
 RUN pip install ${PGADMIN_FILE} \
         && ln -sf /home/pgadmin/.pgadmin/config_local.py  /usr/local/lib/python2.7/dist-packages/pgadmin4/config_local.py \
-        && sed -i "s/DEFAULT_SERVER = 'localhost'/DEFAULT_SERVER = '0.0.0.0'/" /usr/local/lib/python2.7/dist-packages/pgadmin4/config.py
+        && sed -ie "s/DEFAULT_SERVER = '.*'/DEFAULT_SERVER = '0.0.0.0'/" /usr/local/lib/python2.7/dist-packages/pgadmin4/config.py
 
 RUN rm ${PGADMIN_FILE} ;
 
